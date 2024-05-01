@@ -11,7 +11,7 @@ def __get_star_position(image, xsize, ysize):
 			return x, y
 
 
-def get_track_infos(image_path):
+def get_track_infos(image_path, width, height):
 	image = Image.open(image_path)
 
 	xsize, ysize = image.size
@@ -20,8 +20,17 @@ def get_track_infos(image_path):
 
 	border_color = image.getpixel((0, 0))
 
-	start_point = __get_star_position(image, xsize, ysize)
+	x, y = __get_star_position(image, xsize, ysize)
+
+	start_point = int(x * width / xsize), int(y * height / ysize)
 
 	return start_point, border_color
 
 
+def main():
+	track_path = r"Images\Track_1.png"
+	print(get_track_infos(track_path, 1280, 720))
+
+
+if __name__ == '__main__':
+	main()
